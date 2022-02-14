@@ -42,3 +42,16 @@ func Crc16ccitt(buf []uint8) uint16 {
 	}
 	return crc
 }
+
+func Crc16ccitt2(buf1 []uint8, buf2 []uint8) uint16 {
+	crc := uint16(0)
+	for _, v := range buf1 {
+		crc = (crc << 8) ^ crc16table[(uint8(crc>>8)^v)]
+	}
+
+	for _, v := range buf2 {
+		crc = (crc << 8) ^ crc16table[(uint8(crc>>8)^v)]
+	}
+
+	return crc
+}
